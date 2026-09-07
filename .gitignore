@@ -1,0 +1,11 @@
+# Compiled outputs
+output/*.docx
+!output/.gitkeep
+
+# OS and Editor files
+.DS_Store
+Thumbs.db
+*.swp
+*~
+.vscode/
+.idea/

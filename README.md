@@ -22,9 +22,9 @@ Workflow:
                          Pandoc
                             │
                             ▼
-                    ┌───────────────┐
+                    ┌────────────────┐
                     │ manuscript.docx│
-                    └───────────────┘
+                    └────────────────┘
 ```
 
 Another advantage is that you can easily do manuscript version control with `git`.
@@ -52,7 +52,7 @@ A text editor
 
 Clone the repository with:
 ```
-git clone git@github.com:you/pandoc-academic-manuscript-template.git report-x
+git clone git@github.com:AnttonLA/pandoc-academic-manuscript-template.git report-x
 cd report-x
 rm -rf .git
 git init
