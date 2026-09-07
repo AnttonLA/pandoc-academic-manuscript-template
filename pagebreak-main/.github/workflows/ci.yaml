@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  # Run on all pull requests that change code.
+  pull_request:
+    paths-ignore:
+      - 'README.md'
+      - LICENSE
+      - .editorconfig
+  # Run every time a code change is pushed.
+  push:
+    paths-ignore:
+      - 'README.md'
+      - LICENSE
+      - .editorconfig
+  # Test if things still work each Tuesday morning.
+  # This way we will catch incompatible pandoc changes in a timely
+  # manner.
+  schedule:
+    # At 4:33am each Tuesday
+    - cron: '33 4 * * 2'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        pandoc:
+          - latest
+          # The oldest version that's guaranteed to be supported.
+          # Older versions down to 2.17 should work, too, but aren't
+          # tested, as there have been syntax changes in the generated
+          # output.
+          - 3.7.0.1
+
+    container:
+      image: pandoc/core:${{ matrix.pandoc }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: apk add make
+
+      - name: Test
+        run: make test
